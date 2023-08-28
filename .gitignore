@@ -1,0 +1,28 @@
+# Compiled Go files
+*.o
+*.a
+*.exe
+*.test
+
+# Dependency directories
+/vendor/
+/go.sum
+
+# Binary files
+/mlctl
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# macOS specific files
+.DS_Store
+
+# Log files
+*.log
+
+# Additional
+utilities_test.go
+deprecated_commands.go
+gitutils.go
+test/

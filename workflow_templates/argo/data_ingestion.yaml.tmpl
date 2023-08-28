@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: {{ .WorkflowNamePrefix }}data-ingestion-
+spec:
+  entrypoint: data-ingestion
+  templates:
+    - name: data-ingestion
+      steps:
+        - - name: load-data
+            template: load-data
+        - - name: preprocess-data
+            template: preprocess-data
+    - name: load-data
+      container:
+        image: {{ .DataLoaderImage }}
+        args: ["load-data.sh"]
+    - name: preprocess-data
+      container:
+        image: {{ .DataPreprocessingImage }}
+        args: ["preprocess-data.sh"]

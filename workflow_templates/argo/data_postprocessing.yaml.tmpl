@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: {{ .WorkflowNamePrefix }}data-postprocessing-
+spec:
+  entrypoint: data-postprocessing
+  templates:
+    - name: data-postprocessing
+      steps:
+        - - name: postprocess-data
+            template: postprocess-data
+    - name: postprocess-data
+      container:
+        image: {{ .DataPostprocessingImage }}
+        args: ["postprocess-data.sh"]

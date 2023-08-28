@@ -1,0 +1,9 @@
+{
+    "WorkflowNamePrefix": "foo",
+    "DataLoaderImage": "foo",
+    "DataPreprocessingImage": "foo",
+    "ModelTrainingImage": "foo",
+    "ModelEvaluationImage": "foo",
+    "ModelDeploymentImage": "foo",
+    "DataPostprocessingImage": "foo"
+}

@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: {{ .WorkflowNamePrefix }}model-evaluation-
+spec:
+  entrypoint: model-evaluation
+  templates:
+    - name: model-evaluation
+      steps:
+        - - name: evaluate-model
+            template: evaluate-model
+    - name: evaluate-model
+      container:
+        image: {{ .ModelEvaluationImage }}
+        args: ["evaluate-model.sh"]
