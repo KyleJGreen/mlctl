@@ -21,7 +21,17 @@ var templateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		templateType := args[0]
 		configFile := "./template_config.json" // Update the filename
-		templateDir := fmt.Sprintf("workflow_templates/%s", templateType)
+
+		tmpDir, err := ForkRepository()
+		if err != nil {
+			fmt.Println("Error forking repository:", err)
+		} else {
+			fmt.Println("Repository forked successfully!")
+		}
+
+		defer os.RemoveAll(tmpDir) // Ensure cleanup after the program exits.
+
+		templateDir := fmt.Sprintf("%s/workflows/%s", tmpDir, templateType)
 
 		config, err := LoadConfiguration(configFile)
 		if err != nil {
