@@ -21,8 +21,10 @@ var templateCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		templateType := args[0]
 		configFile := "./template_config.json" // Update the filename
+		// Create a real HTTP client instance
+		gitClient := &DefaultGitClient{}
 
-		tmpDir, err := ForkRepository()
+		tmpDir, err := ForkRepository(gitClient)
 		if err != nil {
 			fmt.Println("Error forking repository:", err)
 		} else {
